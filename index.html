@@ -4,161 +4,496 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Prescott Logic</title>
-  <meta name="description" content="We build software that allows people to describe their intent, and have intelligent systems act on it." />
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
+  <meta
+    name="description"
+    content="Prescott Logic builds practical intelligence systems for work, decisions, and real-world operations."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --pl-bg: #0b1020;
-      --pl-bg-2: #0e1428;
-      --pl-amber: #ffae00;       /* neon amber (stroke) */
-      --pl-amber-soft: #ffd54f;  /* soft glow */
-      --pl-text: #eaeff7;
-      --pl-muted: #99a3b3;
-      --pl-card: rgba(255,255,255,0.04);
-      --pl-stroke: rgba(255, 213, 79, 0.18);
+      --bg: #09101c;
+      --bg-2: #10182b;
+      --panel: rgba(255, 255, 255, 0.05);
+      --panel-strong: rgba(17, 24, 39, 0.72);
+      --line: rgba(255, 213, 79, 0.18);
+      --text: #edf2fb;
+      --muted: #a4afc2;
+      --amber: #ffb000;
+      --amber-soft: #ffd86a;
+      --pink: #ff5ca7;
+      --teal: #53d7d6;
+      --max: 1120px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    html, body { height: 100%; }
     body {
-      margin: 0; color: var(--pl-text);
+      margin: 0;
+      color: var(--text);
+      font-family: Inter, system-ui, sans-serif;
       background:
-        radial-gradient(1200px 600px at 20% 100%, rgba(122,60,255,0.25), transparent 60%),
-        radial-gradient(800px 500px at 80% 0%, rgba(34,211,238,0.2), transparent 55%),
-        linear-gradient(180deg, var(--pl-bg-2) 0%, var(--pl-bg) 30%, #090e1a 100%);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+        radial-gradient(900px 520px at 10% 0%, rgba(255, 176, 0, 0.16), transparent 58%),
+        radial-gradient(720px 440px at 100% 0%, rgba(83, 215, 214, 0.14), transparent 55%),
+        linear-gradient(180deg, #0a1020 0%, var(--bg) 42%, #060b14 100%);
     }
 
-    /* Layout helpers */
-    .container { width: min(1100px, 92vw); margin: 0 auto; padding: 0 0 80px; }
-    section { padding: 80px 0; border-top: 1px solid rgba(255,255,255,0.04); }
+    a { color: inherit; }
+    .shell { width: min(var(--max), calc(100vw - 40px)); margin: 0 auto; }
 
-    /* Top nav (logo removed) */
     .nav {
-      position: sticky; top: 0; z-index: 60;
-      backdrop-filter: blur(8px);
-      background: linear-gradient(180deg, rgba(11,16,32,0.85), rgba(11,16,32,0.65));
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .nav-inner { display:flex; align-items:center; justify-content:flex-end; width:min(1100px,92vw); margin:0 auto; padding:12px 0; }
-    .brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
-    /* Remove the image from the brand area but keep spacing/layout intact */
-    .brand img { display:none; }
-
-    .links { display:flex; gap:16px; align-items:center; }
-    .links a { color: var(--pl-amber-soft); text-decoration:none; padding:8px 12px; border-radius:999px; font-weight:700;
-  text-shadow:
-    0 0 4px rgba(255,185,80,0.75),
-    0 0 10px rgba(255,120,0,0.55),
-    0 0 22px rgba(255,120,0,0.45);
-}
-
-    .links a:hover { background: rgba(255,255,255,0.06); }
-
-    /* Top neon banner (text-based, matches bottom neon style) */
-.neon-text {
-  color: var(--pl-amber-soft);
-  text-shadow:
-    0 0 4px rgba(255,185,80,0.75),
-    0 0 10px rgba(255,120,0,0.55),
-    0 0 22px rgba(255,120,0,0.45),
-    0 0 40px rgba(255,120,0,0.35);
-}
-.top-banner {
-  position: sticky; top: 0; z-index: 70; /* sits above nav/bg, scroll-persistent */
-  background: transparent; /* match page background */
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.banner-text {
-  margin: 0; padding: 14px 18px; /* compact, like a strap */
-  text-align: center;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  font-size: clamp(16px, 2.1vw, 22px);
-}
-
-    /* Hero (tagline removed) */
-    .hero { text-align:center; padding: 64px 0 40px; }
-    .logo-wrap { display:grid; place-items:center; margin: 16px auto 6px;
-      filter: drop-shadow(0 0 25px rgba(255,174,0,0.35)) drop-shadow(0 0 70px rgba(122,60,255,0.25));
-    }
-    .hero-banner {
-      width: min(660px, 60vw);
-      height: auto;
-      border-radius:18px;
-      outline:1px solid var(--pl-stroke);
-      box-shadow: 0 0 0 2px rgba(255,174,0,0.08) inset, 0 10px 40px rgba(0,0,0,0.35);
-    }
-    .cta { display:inline-flex; align-items:center; gap:10px; font-weight:600; padding:14px 20px; border-radius:999px;
-      background: linear-gradient(90deg, #ff2d92, var(--pl-amber)); color:#0b0b0b; text-decoration:none;
-      box-shadow: 0 0 22px rgba(255,45,146,0.5), 0 0 44px rgba(255,174,0,0.35);
-      transition: transform 120ms ease, box-shadow 200ms ease, filter 200ms ease;
-    }
-    .cta:hover { transform: translateY(-1px); filter:saturate(1.1); box-shadow: 0 0 30px rgba(255,45,146,0.65), 0 0 60px rgba(255,174,0,0.5); }
-
-    /* Section headings */
-    .section-title {
-      font-family: Orbitron, Inter;
-      color: var(--pl-amber-soft);
-      font-size: clamp(20px, 3.2vw, 28px);
-      margin: 0 0 16px;
-      text-shadow: 0 0 10px rgba(255,174,0,0.45);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(9, 16, 28, 0.92), rgba(9, 16, 28, 0.7));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    /* Bottom neon quote */
-    .footer-quote {
-  margin: 0; padding: 40px 16px 64px;
-  text-align: center;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  font-size: clamp(16px, 2.1vw, 22px);
-  /* visual color/glow now inherited from .neon-text */
-}
+    .nav-inner {
+      width: min(var(--max), calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 16px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-family: Orbitron, Inter, sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--amber-soft);
+      text-decoration: none;
+      text-shadow: 0 0 16px rgba(255, 176, 0, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      padding: 8px 12px;
+      border-radius: 999px;
+      transition: background 160ms ease, color 160ms ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 64px 0 48px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-panel,
+    .panel,
+    .portfolio-card,
+    .pillar {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+    }
+
+    .hero-copy {
+      padding: 36px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 176, 0, 0.12);
+      color: var(--amber-soft);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: Orbitron, Inter, sans-serif;
+      line-height: 1.08;
+    }
+
+    h1 {
+      font-size: clamp(2.25rem, 5vw, 4.5rem);
+      max-width: 12ch;
+      color: #fff7dd;
+      text-shadow: 0 0 24px rgba(255, 176, 0, 0.18);
+    }
+
+    .lead {
+      margin: 22px 0 0;
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .button-primary {
+      background: linear-gradient(90deg, var(--pink), var(--amber));
+      color: #120d05;
+      box-shadow: 0 10px 24px rgba(255, 92, 167, 0.22);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .hero-panel {
+      padding: 18px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .hero-image {
+      width: 100%;
+      display: block;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #060b14;
+    }
+
+    .signal-note {
+      padding: 16px;
+      border-radius: 18px;
+      background: var(--panel-strong);
+      border: 1px solid rgba(83, 215, 214, 0.18);
+    }
+
+    .signal-note strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--amber-soft);
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .signal-note p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    section {
+      padding: 28px 0 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 20px;
+    }
+
+    .section-head p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 60ch;
+    }
+
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .panel,
+    .pillar,
+    .portfolio-card {
+      padding: 24px;
+    }
+
+    .panel h3,
+    .pillar h3,
+    .portfolio-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+      color: #fff1c4;
+    }
+
+    .panel p,
+    .pillar p,
+    .portfolio-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--teal);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .portfolio-card small {
+      display: block;
+      margin-top: 14px;
+      color: #d8c173;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .quote {
+      margin: 32px 0 70px;
+      padding: 28px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+      color: var(--amber-soft);
+      font-weight: 700;
+      line-height: 1.7;
+      text-shadow: 0 0 18px rgba(255, 176, 0, 0.18);
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero {
+        padding-top: 36px;
+      }
+
+      .hero-copy,
+      .hero-panel,
+      .panel,
+      .portfolio-card,
+      .pillar {
+        padding: 20px;
+        border-radius: 20px;
+      }
+    }
   </style>
 </head>
 <body>
-
-  <!-- Top neon banner (new) -->
-  <div class="top-banner">
-  <p class="banner-text neon-text">WE BUILD SOFTWARE THAT ALLOWS PEOPLE TO DESCRIBE THEIR INTENT, AND HAVE INTELLIGENT SYSTEMS ACT ON IT.</p>
-</div>
-
-  <!-- Navigation (logo removed) -->
   <nav class="nav">
     <div class="nav-inner">
-      <!-- Logo removed by request; keeping element for spacing -->
-      
+      <a class="brand" href="#top">Prescott Logic</a>
+      <div class="nav-links">
+        <a href="#what-we-build">What We Build</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#how-we-work">How We Work</a>
+        <a href="#company">Company</a>
+      </div>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="logo-wrap">
-      <img src="images/PL1.png" alt="Prescott Logic Banner" class="hero-banner" />
-    </div>
-    <!-- Tagline removed by request -->
-    <a href="#about" class="cta">Learn More</a>
-  </section>
+  <main id="top" class="shell">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Prescott Logic</span>
+          <h1>Practical intelligence systems for work, decisions, and real-world operations.</h1>
+          <p class="lead">
+            Prescott Logic builds operator-grade software and signal-driven systems that help people and organizations understand what is happening, decide what matters, and act with less friction.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#portfolio">View Portfolio</a>
+            <a class="button button-secondary" href="#what-we-build">How We Work</a>
+          </div>
+        </div>
 
-  <!-- About -->
-  <section id="about">
-    <div class="container">
-      <h2 class="section-title">About</h2>
-      <p class="neon-text">Founded in Oakland, CA in 2025</p>
-    </div>
-  </section>
+        <div class="hero-panel">
+          <img src="images/PL1.png" alt="Prescott Logic visual mark" class="hero-image" />
+          <div class="signal-note">
+            <strong>Company Logic</strong>
+            <p>
+              Different products, same logic: better context, clearer decisions, more reliable action.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- Bottom neon quote (new) -->
-  <p class="footer-quote neon-text">
-    “All that is visible must grow beyond itself, and extend into the realm of the invisible.” T.G. Dumont, 1982
-  </p>
+    <section id="what-we-build">
+      <div class="section-head">
+        <div>
+          <h2>What We Build</h2>
+          <p>
+            Prescott Logic has two main lanes. One helps operators run work, decisions, and business systems more clearly. The other applies the same practical intelligence approach to machine health and signal-driven monitoring.
+          </p>
+        </div>
+      </div>
 
+      <div class="grid-2">
+        <article class="panel">
+          <span class="tag">Operator Software</span>
+          <h3>Workflow, decisions, and company operating systems</h3>
+          <p>
+            We build systems that turn planning, approvals, tasks, and business context into clearer execution. These tools are designed for people responsible for outcomes, not just casual app usage.
+          </p>
+        </article>
+
+        <article class="panel">
+          <span class="tag">Signal-Driven Systems</span>
+          <h3>Monitoring and machine-health intelligence</h3>
+          <p>
+            We build systems that capture real-world signals, establish baselines, detect anomalies, and turn those signals into actionable operational insight.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="portfolio">
+      <div class="section-head">
+        <div>
+          <h2>Portfolio</h2>
+          <p>
+            Prescott Logic products stand on their own, but they share a common operating logic: observe, structure, interpret, decide, act.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <article class="portfolio-card">
+          <span class="tag">Internal Platform</span>
+          <h3>Prescott Logic</h3>
+          <p>
+            The internal operator platform for running the company, coordinating workflows, and proving the operating model in practice.
+          </p>
+          <small>Internal system</small>
+        </article>
+
+        <article class="portfolio-card">
+          <span class="tag">Operator Product</span>
+          <h3>One Person Company</h3>
+          <p>
+            A product-first expression of the operator software thesis: clearer business execution for founder-led work.
+          </p>
+          <small>By Prescott Logic</small>
+        </article>
+
+        <article class="portfolio-card">
+          <span class="tag">Machine Health</span>
+          <h3>Appliance Sentinel</h3>
+          <p>
+            The appliance-first wedge into a broader machine-health platform: retrofit sensing, baselines, anomaly detection, and actionable interpretation.
+          </p>
+          <small>By Prescott Logic</small>
+        </article>
+      </div>
+    </section>
+
+    <section id="how-we-work">
+      <div class="section-head">
+        <div>
+          <h2>How We Work</h2>
+          <p>
+            The company is practical about AI. We are more interested in trusted systems, repeatable workflows, and compounding context than in theatrical demos.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <article class="pillar">
+          <h3>Context over hype</h3>
+          <p>
+            The strongest systems get better with history, labels, baselines, and repeated use. We prefer compounding context to novelty.
+          </p>
+        </article>
+
+        <article class="pillar">
+          <h3>Operators over abstraction</h3>
+          <p>
+            We build for people responsible for outcomes. That keeps the work grounded in real decisions and real operational pressure.
+          </p>
+        </article>
+
+        <article class="pillar">
+          <h3>Signals over theater</h3>
+          <p>
+            Better models should strengthen the system, not define the whole business. Real workflows and real-world signals matter more than wrapper language.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="company">
+      <div class="section-head">
+        <div>
+          <h2>Company</h2>
+          <p>
+            Founded in Oakland, California, Prescott Logic is building a portfolio of operator-grade systems that help people and organizations work with more clarity and less friction.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Working company description</h3>
+        <p>
+          Prescott Logic builds practical intelligence systems that help people and organizations operate with more clarity, better decisions, and less friction.
+        </p>
+      </div>
+    </section>
+
+    <p class="quote">
+      Practical over theatrical. Context over hype. Systems over demos.
+    </p>
+  </main>
 </body>
 </html>
-
